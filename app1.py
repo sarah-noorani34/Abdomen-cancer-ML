@@ -85,46 +85,10 @@ input_data_manual = pd.DataFrame([[Alvarado_Score, Paedriatic_Appendicitis_Score
 
 # URL of the CSV file hosted on GitHub
 csv_url = 'https://github.com/sarah-noorani34/Abdomen-cancer-ML/blob/main/top_10_features.csv' 
-
-# Option to read CSV from GitHub
-# st.header("Prediction from GitHub-hosted CSV Data")
-
-try:
-    # Load the CSV data directly from GitHub
-    df_uploaded = pd.read_csv(csv_url)
-
-    # Show the first few rows of the uploaded CSV for preview
-    st.write("Data Preview from GitHub:")
-    st.write(df_uploaded.head())
-
-    # Check if the necessary columns are in the uploaded file
-    required_columns = ['Alvarado_Score', 'Paedriatic_Appendicitis_Score', 'WBC_Count', 'Neutrophilia', 
-                        'Management', 'Severity', 'Length_of_Stay', 'CRP', 'Peritonitis', 'Age', 'BMI', 
-                        'Height', 'Weight', 'Sex']
-    
-    missing_columns = [col for col in required_columns if col not in df_uploaded.columns]
-    
-    if len(missing_columns) > 0:
-        st.error(f"Missing columns in the uploaded file: {', '.join(missing_columns)}")
-    else:
-        # Organize the uploaded data into a DataFrame with the correct columns
-        input_data_csv = df_uploaded[required_columns]
-
-        # Predict using the CSV data
-        predictions_csv = log_reg.predict(input_data_csv)
-        probabilities_csv = log_reg.predict_proba(input_data_csv)[:, 1]  # Probability for class 1 (positive diagnosis)
-
-        # Display predictions and probabilities
-        st.write("Predictions for the uploaded CSV data:")
-        df_uploaded['Prediction'] = predictions_csv
-        df_uploaded['Probability'] = probabilities_csv
-        st.write(df_uploaded[['Prediction', 'Probability']])
-
-except Exception as e:
-    st.error(f"Error loading CSV from GitHub: {str(e)}")
+df_uploaded = pd.read_csv(csv_url)
 
 # Manual Input Prediction Button
-if st.button("Predict Manual Input"):
+if st.button("Predict Input"):
     # Make prediction for manual input
     if not (Alvarado_Score and Paedriatic_Appendicitis_Score and WBC_Count and Neutrophilia and 
             Management and Severity and Length_of_Stay and CRP and Peritonitis and Age and BMI and 
