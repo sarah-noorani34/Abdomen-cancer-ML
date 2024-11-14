@@ -87,3 +87,11 @@ st.write("Random Forest Prediction:", rand_forest_pred)
 st.subheader("Model Accuracies")
 st.write("Logistic Regression Accuracy:", log_reg_accuracy)
 st.write("Random Forest Accuracy:", rand_forest_accuracy)
+
+try:
+    log_reg_pred = log_reg.predict(input_data)[0]
+    rand_forest_pred = rand_forest.predict(input_data)[0]
+except AttributeError as e:
+    st.error(f"An error occurred: {str(e)}")
+    st.write("Please check input data format and model compatibility.")
+
