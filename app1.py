@@ -7,7 +7,7 @@ import joblib
 log_reg = joblib.load('logistic_regression_model.pkl')
 
 # Title and Description
-st.title("Diagnosis Prediction with Logistic Regression")
+st.title("Diagnosis Analysis with Logistic Regression")
 st.write("This app uses a Logistic Regression model to predict diagnosis based on user input.")
 
 # User inputs
